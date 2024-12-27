@@ -3,17 +3,20 @@ const memoryList = document.getElementById('memoryList');
 const processSizeInput = document.getElementById('processSizeInput');
 const firstFitBtn = document.getElementById('firstFitBtn');
 const worstFitBtn = document.getElementById('worstFitBtn');
-const logText = document.getElementById('logText');
+const logText = document.getElementById('logText'); 
 const editModal = document.getElementById('editModal');
 const editBlockSize = document.getElementById('editBlockSize');
 const editSaveBtn = document.getElementById('editSaveBtn');
 const editCancelBtn = document.getElementById('editCancelBtn');
 const resetLogBtn = document.getElementById('resetLogBtn');
 
+// Determine which page we're on
+const isFirstFitPage = document.title.includes('First Fit');
+
 // Memory state - initialized with size 0
 let memoryBlocks = [
   { size: 0, remaining: 0, occupied: false },
-  { size: 0, remaining: 0, occupied: false },
+  { size: 0, remaining: 0, occupied: false }, 
   { size: 0, remaining: 0, occupied: false },
   { size: 0, remaining: 0, occupied: false },
   { size: 0, remaining: 0, occupied: false },
@@ -23,7 +26,7 @@ let memoryBlocks = [
 
 let currentEditBlock = null;
 
-// Algorithms
+// First Fit Algorithm
 function firstFit(processSize) {
   for (let i = 0; i < memoryBlocks.length; i++) {
     const block = memoryBlocks[i];
@@ -34,26 +37,27 @@ function firstFit(processSize) {
   return -1;
 }
 
+// Worst Fit Algorithm
 function worstFit(processSize) {
-  let maxBlockIndex = -1;
-  let maxBlockSize = -1;
+  let worstFitIndex = -1;
+  let largestRemainingSize = -1;
 
   for (let i = 0; i < memoryBlocks.length; i++) {
     const block = memoryBlocks[i];
-    if (block.size > 0 && block.remaining >= processSize && !block.occupied && block.remaining > maxBlockSize) {
-      maxBlockIndex = i;
-      maxBlockSize = block.remaining;
+    if (block.size > 0 && block.remaining >= processSize && !block.occupied) {
+      if (block.remaining > largestRemainingSize) {
+        largestRemainingSize = block.remaining;
+        worstFitIndex = i;
+      }
     }
   }
-
-  return maxBlockIndex;
+  return worstFitIndex;
 }
 
 // UI Updates
 function updateMemoryList() {
   const tbody = memoryList.querySelector('tbody');
   tbody.innerHTML = '';
-
 
   memoryBlocks.forEach((block, index) => {
     const row = document.createElement('tr');
@@ -89,73 +93,76 @@ function editBlock(index) {
   editModal.classList.remove('hidden');
 }
 
-firstFitBtn.addEventListener('click', () => {
+function handleAllocation(algorithm) {
   const processSize = parseInt(processSizeInput.value);
   if (!processSize || processSize <= 0) {
     alert('Please enter a valid process size');
     return;
   }
 
-  const blockIndex = firstFit(processSize);
+  const algorithmType = algorithm === 'first' ? 'First Fit' : 'Worst Fit';
+  const blockIndex = algorithm === 'first' ? firstFit(processSize) : worstFit(processSize);
+
   if (blockIndex === -1) {
-    logAllocation('First Fit', processSize, 'No suitable memory block found');
+    logAllocation(algorithmType, processSize, 'No suitable memory block found');
   } else {
     const block = memoryBlocks[blockIndex];
     block.remaining = block.remaining - processSize;
     block.occupied = true;
-    logAllocation('First Fit', processSize,
+    logAllocation(algorithmType, processSize,
       `Allocated to memory block ${blockIndex + 1}`, block.remaining);
     updateMemoryList();
   }
-});
 
-worstFitBtn.addEventListener('click', () => {
-  const processSize = parseInt(processSizeInput.value);
-  if (!processSize || processSize <= 0) {
-    alert('Please enter a valid process size');
-    return;
-  }
+  processSizeInput.value = '';
+}
 
-  const blockIndex = worstFit(processSize);
-  if (blockIndex === -1) {
-    logAllocation('Worst Fit', processSize, 'No suitable memory block found');
-  } else {
-    const block = memoryBlocks[blockIndex];
-    block.remaining = block.remaining - processSize;
-    block.occupied = true;
-    logAllocation('Worst Fit', processSize,
-      `Allocated to memory block ${blockIndex + 1}`, block.remaining);
+// Add event listeners based on the page
+if (isFirstFitPage && firstFitBtn) {
+  firstFitBtn.addEventListener('click', () => handleAllocation('first'));
+} else if (!isFirstFitPage && worstFitBtn) {
+  worstFitBtn.addEventListener('click', () => handleAllocation('worst'));
+}
+
+if (editSaveBtn) {
+  editSaveBtn.addEventListener('click', () => {
+    const newSize = parseInt(editBlockSize.value);
+    if (!newSize || newSize <= 0) {
+      alert('Please enter a valid block size');
+      return;
+    }
+
+    memoryBlocks[currentEditBlock] = {
+      size: newSize,
+      remaining: newSize,
+      occupied: false
+    };
+
+    editModal.classList.add('hidden');
+    currentEditBlock = null;
     updateMemoryList();
-  }
-});
+  });
+}
 
-editSaveBtn.addEventListener('click', () => {
-  const newSize = parseInt(editBlockSize.value);
-  if (!newSize || newSize <= 0) {
-    alert('Please enter a valid block size');
-    return;
-  }
+if (editCancelBtn) {
+  editCancelBtn.addEventListener('click', () => {
+    editModal.classList.add('hidden');
+    currentEditBlock = null;
+  });
+}
 
-  memoryBlocks[currentEditBlock] = {
-    size: newSize,
-    remaining: newSize, // Set remaining equal to new size initially
-    occupied: false
-  };
+if (resetLogBtn) {
+  resetLogBtn.addEventListener('click', () => {
+    logText.innerHTML = '';
 
-  editModal.classList.add('hidden');
-  currentEditBlock = null;
-  updateMemoryList();
-});
+    memoryBlocks.forEach(block => {
+      block.remaining = block.size;
+      block.occupied = false;
+    });
 
-editCancelBtn.addEventListener('click', () => {
-  editModal.classList.add('hidden');
-  currentEditBlock = null;
-});
-
-// Add this with other event listeners
-resetLogBtn.addEventListener('click', () => {
-  logText.innerHTML = ''; // Clear the log content
-});
+    updateMemoryList();
+  });
+}
 
 // Initialize
 updateMemoryList();

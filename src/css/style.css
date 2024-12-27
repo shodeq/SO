@@ -1,0 +1,23 @@
+
+.neo-brutalism {
+    border: 3px solid black;
+    box-shadow: 5px 5px 0px 0px black;
+    transition: all 0.2s ease;
+}
+.neo-brutalism:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px 0px black;
+}
+.neo-button {
+    border: 3px solid black;
+    box-shadow: 3px 3px 0px 0px black;
+    transition: all 0.2s ease;
+}
+.neo-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px 0px black;
+}
+.neo-input {
+    border: 3px solid black;
+    box-shadow: 3px 3px 0px 0px black;
+}

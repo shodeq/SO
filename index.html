@@ -4,123 +4,62 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Font Awesome Cdn -->
+    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- CSS -->
-    <link rel="stylesheet" href="./src/css/main.css" />
-    <!-- JS -->
-    <script src="./src/js/app.js" defer></script>
-    <style>
-        .neo-brutalism {
-            border: 3px solid black;
-            box-shadow: 5px 5px 0px 0px black;
-            transition: all 0.2s ease;
-        }
-        .neo-brutalism:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 7px 0px 0px black;
-        }
-        .neo-button {
-            border: 3px solid black;
-            box-shadow: 3px 3px 0px 0px black;
-            transition: all 0.2s ease;
-        }
-        .neo-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px 0px black;
-        }
-        .neo-input {
-            border: 3px solid black;
-            box-shadow: 3px 3px 0px 0px black;
-        }
-    </style>
-    <title>Disorganized</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/style.css">
+
+    <title>Memory Allocation Tool - Neo Brutalism</title>
 </head>
 
-<body class="bg-purple-600 p-8">
-    <div class="container mx-auto max-w-4xl">
-        <div class="bg-white rounded-xl neo-brutalism p-8">
-            <h1 class="text-4xl font-black text-center mb-8">Memory Allocation Tool</h1>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Left Panel - Memory Blocks -->
-                <div class="space-y-4">
-                    <h2 class="text-2xl font-bold">Memory Blocks</h2>
-                    <div class="overflow-x-auto">
-                        <table id="memoryList" class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="border-2 border-black p-2 bg-yellow-200">Block</th>
-                                    <th class="border-2 border-black p-2 bg-yellow-200">Size</th>
-                                    <th class="border-2 border-black p-2 bg-yellow-200">Remaining</th>
-                                    <th class="border-2 border-black p-2 bg-yellow-200">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Memory blocks will be inserted here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<body class="bg-purple-500 flex justify-center items-center h-screen">
+    <div class="w-full max-w-4xl text-center p-8 bg-white  neo-brutalism">
+        <!-- Title -->
+        <h1 class="text-5xl font-extrabold text-black bg-yellow-400 px-6 py-4 border-[3px] border-black inline-block shadow-brutalist mb-8">
+            Memory Allocation Calculator
+        </h1>
 
-                <!-- Right Panel - Allocation Controls -->
-                <div class="space-y-6">
-                    <div class="space-y-2">
-                        <label class="block text-xl font-bold">Process Size:</label>
-                        <input type="number" id="processSizeInput" 
-                            class="w-full p-3 neo-input bg-blue-100" min="1">
-                    </div>
+        <!-- Subtitle -->
+        <p class="text-xl font-bold text-black bg-cyan-300 px-5 py-3 border-[3px] border-black inline-block shadow-brutalist">
+            Pilih algoritma untuk simulasikan alokasi memori
+        </p>
 
-                    <div class="flex gap-4">
-                        <button id="firstFitBtn" 
-                            class="flex-1 px-4 py-3 bg-green-400 neo-button font-bold">
-                            First Fit
-                        </button>
-                        <button id="worstFitBtn"
-                            class="flex-1 px-4 py-3 bg-purple-400 neo-button font-bold">
-                            Worst Fit
-                        </button>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-3">
-                            <h2 class="text-2xl font-bold">Allocation Log</h2>
-                            <button id="resetLogBtn" 
-                                class="px-4 py-2 bg-red-400 neo-button font-bold">
-                                Reset Log
-                            </button>
-                        </div>
-                        <div id="logText" 
-                            class="h-64 p-4 neo-input bg-gray-100 font-mono text-sm overflow-y-auto">
-                        </div>
-                    </div>
-                </div>
+        <!-- Cards Section -->
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <!-- First Fit Card -->
+            <div
+                class="bg-white  p-6 neo-brutalism neo-brutalism:hover">
+                <h2 class="text-3xl font-extrabold text-black bg-pink-300 px-4 py-2 border-[3px] border-black inline-block shadow-brutalist">
+                    First Fit
+                </h2>
+                <p class="mt-4 text-black">
+                    First Fit adalah algoritma alokasi memori di mana proses dimuat ke partisi pertama yang cukup besar.
+                    <a href="./src/pages/penjelasan_first.html" class="underline text-blue-600">Selengkapnya...</a>
+                </p>
+                <a href="./src/pages/first_fit.html"
+                    class="block mt-6 text-center bg-yellow-400 text-black font-bold px-6 py-3 hover:bg-yellow-600 transition-colors shadow-brutalist neo-button neo-button:hover">
+                    First Fit
+                </a>
             </div>
-        </div>
-    </div>
 
-    <!-- Edit Block Modal -->
-    <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white neo-brutalism p-8 w-96">
-            <h2 class="text-2xl font-bold mb-6">Edit Memory Block</h2>
-            <div class="space-y-6">
-                <div>
-                    <label class="block text-xl font-bold mb-2">Block Size:</label>
-                    <input type="number" id="editBlockSize" 
-                        class="w-full p-3 neo-input bg-blue-100" min="1">
-                </div>
-                <div class="flex justify-end gap-4">
-                    <button id="editCancelBtn" 
-                        class="px-6 py-3 bg-gray-200 neo-button font-bold">
-                        Cancel
-                    </button>
-                    <button id="editSaveBtn"
-                        class="px-6 py-3 bg-blue-400 neo-button font-bold">
-                        Save
-                    </button>
-                </div>
+            <!-- Worst Fit Card -->
+            <div
+                class="bg-white p-6 neo-brutalism neo-brutalism:hover">
+                <h2 class="text-3xl font-extrabold text-black bg-green-300 px-4 py-2 border-[3px] border-black inline-block shadow-brutalist">
+                    Worst Fit
+                </h2>
+                <p class="mt-4 text-black">
+                    Worst Fit adalah algoritma alokasi memori di mana proses dimuat ke partisi terbesar yang tersedia.
+                    <a href="./src/pages/penjelasan_worst.html" class="underline text-blue-600">Selengkapnya...</a>
+                </p>
+                <a href="./src/pages/worst_fit.html"
+                    class="block mt-6 text-center bg-green-400 text-black font-bold px-6 py-3 hover:bg-green-600 transition-colors shadow-brutalist neo-button neo-button:hover">
+                    Worst Fit
+                </a>
             </div>
         </div>
     </div>

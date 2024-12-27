@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Fit Algorithm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .neo-brutalism {
+            background: #ffffff;
+            border: 3px solid #000000;
+            box-shadow: 8px 8px 0px #000000;
+        }
+        .neo-button:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #000000;
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-[#f0f0f0] min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="neo-brutalism bg-[#FFE156] p-8 mb-8">
+            <h1 class="text-4xl font-black mb-4">FIRST FIT ALGORITHM</h1>
+            <p class="text-xl font-bold">Algoritma Alokasi Memori</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="neo-brutalism bg-white p-8 mb-8">
+            <p class="text-lg mb-6">
+                First Fit adalah algoritma alokasi memori di mana proses dimuat ke partisi pertama yang cukup besar.
+            </p>
+
+            <!-- Advantages Section -->
+            <div class="neo-brutalism bg-[#98FB98] p-6 mb-6">
+                <h2 class="text-2xl font-bold mb-4">Kelebihan</h2>
+                <ul class="list-decimal pl-6">
+                    <li class="mb-2">Fragmentasi eksternal lebih rendah karena ruang tersisa lebih besar.</li>
+                    <li class="mb-2">Efisien jangka panjang, meminimalkan potongan kecil memori.</li>
+                </ul>
+            </div>
+
+            <!-- Disadvantages Section -->
+            <div class="neo-brutalism bg-[#FFB6C1] p-6 mb-6">
+                <h2 class="text-2xl font-bold mb-4">Kekurangan</h2>
+                <ul class="list-decimal pl-6">
+                    <li class="mb-2">Memakan waktu lebih lama karena harus memeriksa semua lubang.</li>
+                    <li class="mb-2">Pemanfaatan memori kurang efisien, sering kali menyisakan ruang kosong.</li>
+                </ul>
+            </div>
+
+            <!-- How it Works Section -->
+            <div class="neo-brutalism bg-[#87CEEB] p-6">
+                <h2 class="text-2xl font-bold mb-4">Cara Kerja</h2>
+                <ul class="list-decimal pl-6">
+                    <li class="mb-2">Mulai dari blok memori pertama yang tersedia.</li>
+                    <li class="mb-2">Cari blok memori yang pertama kali cukup besar untuk menampung proses.</li>
+                    <li class="mb-2">Tempatkan proses di blok tersebut, dan sisakan ruang kosong (jika ada).</li>
+                    <li class="mb-2">Jika tidak ada blok yang cukup besar, proses akan ditunda atau gagal dialokasikan.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interactive Button -->
+        <button onclick="window.location.href='../../index.html'" class="neo-brutalism neo-button bg-[#FF69B4] text-white font-bold py-4 px-8 text-lg">
+            Back to Home
+        </button>
+    </div>
+</body>
+</html>

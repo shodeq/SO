@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worst Fit Allocation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- JS -->
+    <script src="../js/app.js" defer></script>
+    <style>
+        .neo-brutalism {
+            background: #ffffff;
+            border: 3px solid #000000;
+            box-shadow: 8px 8px 0px #000000;
+        }
+        .neo-button {
+            transition: all 0.2s ease;
+        }
+        .neo-button:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px #000000;
+        }
+    </style>
+</head>
+<body class="bg-[#f0f0f0] min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="neo-brutalism bg-[#FFE156] p-8 mb-8">
+            <h1 class="text-4xl font-black mb-4">Memory Allocation - Worst Fit</h1>
+            <p class="text-xl font-bold">Worst Fit Algorithm Implementation</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Memory Blocks Section -->
+            <div class="neo-brutalism bg-white p-6">
+                <h2 class="text-2xl font-bold mb-4">Memory Blocks</h2>
+                <div class="overflow-x-auto">
+                    <table id="memoryList" class="w-full">
+                        <thead>
+                            <tr>
+                                <th class="border-2 border-black p-2">Block #</th>
+                                <th class="border-2 border-black p-2">Total Size</th>
+                                <th class="border-2 border-black p-2">Available</th>
+                                <th class="border-2 border-black p-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Memory blocks will be dynamically generated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Allocation Controls -->
+            <div class="neo-brutalism bg-white p-6">
+                <h2 class="text-2xl font-bold mb-4">Allocate Memory</h2>
+                <div class="mb-4">
+                    <label class="block mb-2 font-bold">Process Size:</label>
+                    <input type="number" id="processSizeInput" class="w-full p-2 border-2 border-black" placeholder="Enter size">
+                </div>
+                <button id="worstFitBtn" class="w-full mb-4 p-3 bg-[#98FB98] neo-brutalism neo-button font-bold">
+                    Allocate (Worst Fit)
+                </button>
+                <button id="resetLogBtn" class="w-full p-3 bg-[#FFB6C1] neo-brutalism neo-button font-bold">
+                    Reset All
+                </button>
+            </div>
+        </div>
+
+        <!-- Allocation Log -->
+        <div class="neo-brutalism bg-white p-6 mt-8">
+            <h2 class="text-2xl font-bold mb-4">Allocation Log</h2>
+            <pre id="logText" class="bg-gray-100 p-4 h-48 overflow-y-auto font-mono"></pre>
+        </div>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="neo-brutalism bg-white p-6 max-w-md w-full">
+                <h2 class="text-2xl font-bold mb-4">Edit Memory Block</h2>
+                <div class="mb-4">
+                    <label class="block mb-2 font-bold">Block Size:</label>
+                    <input type="number" id="editBlockSize" class="w-full p-2 border-2 border-black" placeholder="Enter size">
+                </div>
+                <div class="flex gap-4">
+                    <button id="editCancelBtn" class="flex-1 p-3 bg-[#FFB6C1] neo-brutalism neo-button font-bold">
+                        Cancel
+                    </button>
+                    <button id="editSaveBtn" class="flex-1 p-3 bg-[#98FB98] neo-brutalism neo-button font-bold">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="window.location.href='../../index.html'" 
+        class="px-6 py-3 bg-blue-400 neo-brutalism neo-button font-bold">
+        Back to Home
+    </button>
+</body>
+</html>
