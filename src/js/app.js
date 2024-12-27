@@ -8,6 +8,7 @@ const editModal = document.getElementById('editModal');
 const editBlockSize = document.getElementById('editBlockSize');
 const editSaveBtn = document.getElementById('editSaveBtn');
 const editCancelBtn = document.getElementById('editCancelBtn');
+const resetLogBtn = document.getElementById('resetLogBtn');
 
 // Memory state - initialized with size 0
 let memoryBlocks = [
@@ -149,6 +150,11 @@ editSaveBtn.addEventListener('click', () => {
 editCancelBtn.addEventListener('click', () => {
   editModal.classList.add('hidden');
   currentEditBlock = null;
+});
+
+// Add this with other event listeners
+resetLogBtn.addEventListener('click', () => {
+  logText.innerHTML = ''; // Clear the log content
 });
 
 // Initialize

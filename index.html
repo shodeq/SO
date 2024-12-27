@@ -85,7 +85,13 @@
                     </div>
 
                     <div>
-                        <h2 class="text-2xl font-bold mb-3">Allocation Log</h2>
+                        <div class="flex justify-between items-center mb-3">
+                            <h2 class="text-2xl font-bold">Allocation Log</h2>
+                            <button id="resetLogBtn" 
+                                class="px-4 py-2 bg-red-400 neo-button font-bold">
+                                Reset Log
+                            </button>
+                        </div>
                         <div id="logText" 
                             class="h-64 p-4 neo-input bg-gray-100 font-mono text-sm overflow-y-auto">
                         </div>
